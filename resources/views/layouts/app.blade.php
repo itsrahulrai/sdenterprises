@@ -1668,6 +1668,11 @@
         .sde-mobile-drawer {
             max-width: 320px;
             background: #FFFFFF;
+            z-index: 1060 !important;
+        }
+
+        .offcanvas-backdrop {
+            z-index: 1055 !important;
         }
 
         .sde-drawer-header {
@@ -1701,12 +1706,35 @@
             text-decoration: none;
             background: #FAF7F3;
             border: 1px solid #ECE3DA;
+            transition: all 0.2s ease;
+        }
+
+        .sde-mob-link:hover {
+            color: #3B1C10;
+            background: #F3EAE0;
         }
 
         .sde-mob-link.active {
             background: #3B1C10;
-            color: #FFFFFF;
+            color: #FFFFFF !important;
             border-color: #3B1C10;
+        }
+
+        .sde-mob-link.active a {
+            color: #FFFFFF !important;
+        }
+
+        .sde-mob-collapse-btn {
+            background: transparent;
+            border: none;
+            padding: 0 4px;
+            color: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: auto;
         }
 
         .sde-mob-subcat-list {
@@ -1724,6 +1752,11 @@
             text-decoration: none;
             padding: 6px 0;
             display: block;
+        }
+
+        .sde-mob-subcat-link:hover {
+            color: #2B170D;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -2295,6 +2328,251 @@
 
 </footer>
 
+    {{-- Quick Quote Modal --}}
+    <div class="modal fade" id="quickQuoteModal" tabindex="-1" aria-labelledby="quickQuoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content sde-modal-content">
+                <div class="modal-header sde-modal-header">
+                    <div>
+                        <h5 class="modal-title" id="quickQuoteModalLabel">Get a Quick Quote</h5>
+                        <p class="modal-subtitle mb-0">Commercial Coffee Machines &amp; Premix Solutions</p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="sdeQuickQuoteForm" action="{{ route('contact.submit') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label sde-label">Your Name *</label>
+                            <input type="text" name="name" id="quoteName" class="form-control sde-input" placeholder="e.g. Rahul Sharma" required>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <label class="form-label sde-label">Phone Number *</label>
+                                <input type="tel" name="phone" id="quotePhone" class="form-control sde-input" placeholder="+91 99999 99999" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label sde-label">Email Address *</label>
+                                <input type="email" name="email" id="quoteEmail" class="form-control sde-input" placeholder="name@company.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label sde-label">Machine / Premix Requirement</label>
+                            <select name="subject" class="form-select sde-input" id="quoteProductSelect">
+                                <option value="Coffee Vending Machine Enquiry">Coffee Vending Machine</option>
+                                <option value="Tea & Coffee Machine Enquiry">Tea &amp; Coffee Vending Machine</option>
+                                <option value="Atlantis Vending Machine Enquiry">Atlantis Vending Machine</option>
+                                <option value="Coffee Premixes Bulk Order">Coffee Premixes (Nestle / Nescafe)</option>
+                                <option value="Water Dispenser Commercial Quote">Water Dispenser</option>
+                                <option value="Coffee Machine Rental Enquiry">Coffee Machine Rental</option>
+                                <option value="Office Combo Package Quote">Office Combos</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label sde-label">Message / Details</label>
+                            <textarea name="message" id="quoteMessage" class="form-control sde-input" rows="3" placeholder="Tell us your requirement (e.g. office size, estimated daily cups, rental duration)..." required></textarea>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn sde-btn-primary flex-grow-1">
+                                <i class="bi bi-send me-1"></i> Send Request
+                            </button>
+                            <a href="javascript:void(0)" id="quoteWhatsAppBtn" class="btn sde-btn-whatsapp">
+                                <i class="bi bi-whatsapp"></i> Chat Now
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Mobile Offcanvas Drawer Menu --}}
+    <div class="offcanvas offcanvas-start sde-mobile-drawer" tabindex="-1" id="sdeMobileMenu" aria-labelledby="sdeMobileMenuLabel">
+        <div class="offcanvas-header sde-drawer-header">
+            <a href="{{ route('home') }}" class="sde-brand-logo">
+                @if (setting('site_logo'))
+                    <img src="{{ asset('public/storage/' . setting('site_logo')) }}" alt="{{ config('app.name') }}" style="height:42px; width:42px; object-fit:contain; border-radius:50%; background:#ffffff; padding:2px; box-shadow:0 2px 6px rgba(0,0,0,0.25);">
+                @endif
+                <div class="sde-brand-text">
+                    <span class="sde-brand-name text-white" style="font-size:16px; letter-spacing:0.5px;">S D ENTERPRISES</span>
+                    <span class="sde-brand-tagline text-white-50" style="font-size:5.2px; margin-top:2px;">
+                        @php
+                            $drawerWords = preg_split('/\s+/', trim(setting('site_tagline', 'BEVERAGE SOLUTIONS FOR A BETTER TOMORROW')));
+                        @endphp
+                        @foreach($drawerWords as $word)
+                            <span>{{ $word }}</span>
+                        @endforeach
+                    </span>
+                </div>
+            </a>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body sde-drawer-body">
+            <div class="mb-3">
+                <a href="https://wa.me/919911815542?text={{ urlencode('Hello S D Enterprises, I would like to enquire about beverage solutions.') }}" target="_blank" class="btn sde-quote-btn w-100 justify-content-center">
+                    <i class="bi bi-whatsapp"></i>
+                    <span>Enquire Now</span>
+                </a>
+            </div>
+
+            <ul class="sde-mob-menu">
+                {{-- 1. Home --}}
+                <li>
+                    <a href="{{ route('home') }}" class="sde-mob-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                        <span><i class="bi bi-house-door me-2"></i> Home</span>
+                    </a>
+                </li>
+
+                {{-- 2. Shop with All Categories Dropdown --}}
+                <li>
+                    <div class="sde-mob-cat-accordion">
+                        <div class="sde-mob-link {{ request()->routeIs('shop') && !request('category') ? 'active' : '' }}">
+                            <a href="{{ route('shop') }}" class="text-reset text-decoration-none flex-grow-1">
+                                <i class="bi bi-bag me-2"></i> Shop
+                            </a>
+                            <button type="button" class="sde-mob-collapse-btn" data-bs-toggle="collapse" data-bs-target="#mob-menu-shop" aria-expanded="false" aria-label="Toggle Shop submenu">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="collapse" id="mob-menu-shop">
+                            <ul class="sde-mob-subcat-list">
+                                <li>
+                                    <a href="{{ route('shop') }}" class="sde-mob-subcat-link fw-bold">
+                                        &bull; All Products
+                                    </a>
+                                </li>
+                                @foreach($navCategories as $cat)
+                                    <li>
+                                        <a href="{{ route('shop.category', $cat->slug) }}" class="sde-mob-subcat-link">
+                                            &bull; {{ $cat->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+                {{-- 3. Coffee Machines (matching desktop) --}}
+                @if($coffeeMachinesCat)
+                    <li>
+                        <div class="sde-mob-cat-accordion">
+                            <div class="sde-mob-link {{ request()->is('shop/category/' . $coffeeMachinesCat->slug . '*') ? 'active' : '' }}">
+                                <a href="{{ route('shop.category', $coffeeMachinesCat->slug) }}" class="text-reset text-decoration-none flex-grow-1">
+                                    <i class="bi bi-cup-hot me-2"></i> {{ $coffeeMachinesCat->name }}
+                                </a>
+                                @if($coffeeMachinesCat->subcategories->count())
+                                    <button type="button" class="sde-mob-collapse-btn" data-bs-toggle="collapse" data-bs-target="#mob-cat-coffee" aria-expanded="false" aria-label="Toggle Coffee Machines submenu">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                @endif
+                            </div>
+                            @if($coffeeMachinesCat->subcategories->count())
+                                <div class="collapse" id="mob-cat-coffee">
+                                    <ul class="sde-mob-subcat-list">
+                                        @foreach($coffeeMachinesCat->subcategories as $sub)
+                                            <li>
+                                                <a href="{{ route('shop.subcategory', ['categorySlug' => $coffeeMachinesCat->slug, 'subcategorySlug' => $sub->slug]) }}" class="sde-mob-subcat-link">
+                                                    &bull; {{ $sub->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                        <li>
+                                            <a href="{{ route('shop.category', $coffeeMachinesCat->slug) }}" class="sde-mob-subcat-link fw-bold">
+                                                &rarr; View All {{ $coffeeMachinesCat->name }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+                        </div>
+                    </li>
+                @endif
+
+                {{-- 4. Tea Machines (matching desktop) --}}
+                @if($teaMachinesCat)
+                    <li>
+                        <div class="sde-mob-cat-accordion">
+                            <div class="sde-mob-link {{ request()->is('shop/category/' . $teaMachinesCat->slug . '*') ? 'active' : '' }}">
+                                <a href="{{ route('shop.category', $teaMachinesCat->slug) }}" class="text-reset text-decoration-none flex-grow-1">
+                                    <i class="bi bi-cup me-2"></i> {{ $teaMachinesCat->name }}
+                                </a>
+                                @if($teaMachinesCat->subcategories->count())
+                                    <button type="button" class="sde-mob-collapse-btn" data-bs-toggle="collapse" data-bs-target="#mob-cat-tea" aria-expanded="false" aria-label="Toggle Tea Machines submenu">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                @endif
+                            </div>
+                            @if($teaMachinesCat->subcategories->count())
+                                <div class="collapse" id="mob-cat-tea">
+                                    <ul class="sde-mob-subcat-list">
+                                        @foreach($teaMachinesCat->subcategories as $sub)
+                                            <li>
+                                                <a href="{{ route('shop.subcategory', ['categorySlug' => $teaMachinesCat->slug, 'subcategorySlug' => $sub->slug]) }}" class="sde-mob-subcat-link">
+                                                    &bull; {{ $sub->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                        <li>
+                                            <a href="{{ route('shop.category', $teaMachinesCat->slug) }}" class="sde-mob-subcat-link fw-bold">
+                                                &rarr; View All {{ $teaMachinesCat->name }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+                        </div>
+                    </li>
+                @endif
+
+                {{-- 5. Combos (matching desktop) --}}
+                @if($combosCat)
+                    <li>
+                        <a href="{{ route('shop.category', $combosCat->slug) }}" class="sde-mob-link {{ request()->is('shop/category/' . $combosCat->slug . '*') ? 'active' : '' }}">
+                            <span><i class="bi bi-box-seam me-2"></i> {{ $combosCat->name }}</span>
+                        </a>
+                    </li>
+                @endif
+
+                {{-- 6. Brands (matching desktop) --}}
+                <li>
+                    <a href="{{ route('shop') }}" class="sde-mob-link">
+                        <span><i class="bi bi-award me-2"></i> Brands</span>
+                    </a>
+                </li>
+
+                {{-- 7. About Us (matching desktop) --}}
+                <li>
+                    <a href="{{ route('about') }}" class="sde-mob-link {{ request()->routeIs('about') ? 'active' : '' }}">
+                        <span><i class="bi bi-info-circle me-2"></i> About Us</span>
+                    </a>
+                </li>
+
+                {{-- 8. Blog (matching desktop) --}}
+                <li>
+                    <a href="{{ route('blog.index') }}" class="sde-mob-link {{ request()->routeIs('blog.*') ? 'active' : '' }}">
+                        <span><i class="bi bi-journal-text me-2"></i> Blog</span>
+                    </a>
+                </li>
+
+                {{-- 9. Contact Us (matching desktop) --}}
+                <li>
+                    <a href="{{ route('contact') }}" class="sde-mob-link {{ request()->routeIs('contact') ? 'active' : '' }}">
+                        <span><i class="bi bi-envelope me-2"></i> Contact Us</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="mt-4 pt-3 border-top">
+                <div class="d-flex flex-column gap-2 font-13 text-muted">
+                    <div><i class="bi bi-telephone-fill me-2 text-primary"></i> <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('site_phone', '+919911815542')) }}" class="text-decoration-none text-dark">{{ setting('site_phone', '+91 99118 15542') }}</a></div>
+                    <div><i class="bi bi-envelope-fill me-2 text-primary"></i> <a href="mailto:{{ setting('site_email', 'thahriani.sumit@gmail.com') }}" class="text-decoration-none text-dark">{{ setting('site_email', 'thahriani.sumit@gmail.com') }}</a></div>
+                    <div><i class="bi bi-geo-alt-fill me-2 text-primary"></i> {{ setting('site_address', 'Rohini, New Delhi - 110085') }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -2665,170 +2943,7 @@
             });
 
         })();
-
-    {{-- Quick Quote Modal --}}
-    <div class="modal fade" id="quickQuoteModal" tabindex="-1" aria-labelledby="quickQuoteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content sde-modal-content">
-                <div class="modal-header sde-modal-header">
-                    <div>
-                        <h5 class="modal-title" id="quickQuoteModalLabel">Get a Quick Quote</h5>
-                        <p class="modal-subtitle mb-0">Commercial Coffee Machines &amp; Premix Solutions</p>
-                    </div>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <form id="sdeQuickQuoteForm" action="{{ route('contact.submit') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label class="form-label sde-label">Your Name *</label>
-                            <input type="text" name="name" id="quoteName" class="form-control sde-input" placeholder="e.g. Rahul Sharma" required>
-                        </div>
-                        <div class="row g-2 mb-3">
-                            <div class="col-6">
-                                <label class="form-label sde-label">Phone Number *</label>
-                                <input type="tel" name="phone" id="quotePhone" class="form-control sde-input" placeholder="+91 99999 99999" required>
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label sde-label">Email Address *</label>
-                                <input type="email" name="email" id="quoteEmail" class="form-control sde-input" placeholder="name@company.com" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label sde-label">Machine / Premix Requirement</label>
-                            <select name="subject" class="form-select sde-input" id="quoteProductSelect">
-                                <option value="Coffee Vending Machine Enquiry">Coffee Vending Machine</option>
-                                <option value="Tea & Coffee Machine Enquiry">Tea &amp; Coffee Vending Machine</option>
-                                <option value="Atlantis Vending Machine Enquiry">Atlantis Vending Machine</option>
-                                <option value="Coffee Premixes Bulk Order">Coffee Premixes (Nestle / Nescafe)</option>
-                                <option value="Water Dispenser Commercial Quote">Water Dispenser</option>
-                                <option value="Coffee Machine Rental Enquiry">Coffee Machine Rental</option>
-                                <option value="Office Combo Package Quote">Office Combos</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label sde-label">Message / Details</label>
-                            <textarea name="message" id="quoteMessage" class="form-control sde-input" rows="3" placeholder="Tell us your requirement (e.g. office size, estimated daily cups, rental duration)..." required></textarea>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn sde-btn-primary flex-grow-1">
-                                <i class="bi bi-send me-1"></i> Send Request
-                            </button>
-                            <a href="javascript:void(0)" id="quoteWhatsAppBtn" class="btn sde-btn-whatsapp">
-                                <i class="bi bi-whatsapp"></i> Chat Now
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Mobile Offcanvas Drawer Menu --}}
-    <div class="offcanvas offcanvas-start sde-mobile-drawer" tabindex="-1" id="sdeMobileMenu" aria-labelledby="sdeMobileMenuLabel">
-        <div class="offcanvas-header sde-drawer-header">
-            <a href="{{ route('home') }}" class="sde-brand-logo">
-                @if (setting('site_logo'))
-                    <img src="{{ asset('public/storage/' . setting('site_logo')) }}" alt="{{ config('app.name') }}" style="height:44px; filter: brightness(0) invert(1);">
-                @endif
-                <div class="sde-brand-text">
-                    <span class="sde-brand-name text-white" style="font-size:16px; letter-spacing:0.5px;">S D ENTERPRISES</span>
-                    <span class="sde-brand-tagline text-white-50" style="font-size:5.2px; margin-top:2px;">
-                        @php
-                            $drawerWords = preg_split('/\s+/', trim(setting('site_tagline', 'BEVERAGE SOLUTIONS FOR A BETTER TOMORROW')));
-                        @endphp
-                        @foreach($drawerWords as $word)
-                            <span>{{ $word }}</span>
-                        @endforeach
-                    </span>
-                </div>
-            </a>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body sde-drawer-body">
-            <div class="mb-3">
-                <a href="https://wa.me/919911815542?text={{ urlencode('Hello S D Enterprises, I would like to enquire about beverage solutions.') }}" target="_blank" class="btn sde-quote-btn w-100 justify-content-center">
-                    <i class="bi bi-whatsapp"></i>
-                    <span>Enquire Now</span>
-                </a>
-            </div>
-
-            <ul class="sde-mob-menu">
-                <li>
-                    <a href="{{ route('home') }}" class="sde-mob-link {{ request()->routeIs('home') ? 'active' : '' }}">
-                        <span><i class="bi bi-house-door me-2"></i> Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('shop') }}" class="sde-mob-link {{ request()->routeIs('shop') ? 'active' : '' }}">
-                        <span><i class="bi bi-shop me-2"></i> All Products</span>
-                    </a>
-                </li>
-
-                @foreach ($navCategories as $cat)
-                    <li>
-                        <div class="sde-mob-cat-accordion">
-                            <a href="{{ route('shop.category', $cat->slug) }}" class="sde-mob-link">
-                                <span>{{ $cat->name }}</span>
-                                @if($cat->subcategories->count())
-                                    <button type="button" class="btn btn-sm p-0 text-muted ms-auto" data-bs-toggle="collapse" data-bs-target="#mob-cat-{{ $cat->id }}" aria-expanded="false">
-                                        <i class="bi bi-chevron-down"></i>
-                                    </button>
-                                @endif
-                            </a>
-                            @if($cat->subcategories->count())
-                                <div class="collapse" id="mob-cat-{{ $cat->id }}">
-                                    <ul class="sde-mob-subcat-list">
-                                        @foreach($cat->subcategories as $sub)
-                                            <li>
-                                                <a href="{{ route('shop.subcategory', ['categorySlug' => $cat->slug, 'subcategorySlug' => $sub->slug]) }}" class="sde-mob-subcat-link">
-                                                    &bull; {{ $sub->name }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                        <li>
-                                            <a href="{{ route('shop.category', $cat->slug) }}" class="sde-mob-subcat-link fw-bold">
-                                                &rarr; View All {{ $cat->name }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            @endif
-                        </div>
-                    </li>
-                @endforeach
-
-                <li>
-                    <a href="{{ route('about') }}" class="sde-mob-link">
-                        <span><i class="bi bi-info-circle me-2"></i> About Us</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('blog.index') }}" class="sde-mob-link">
-                        <span><i class="bi bi-journal-text me-2"></i> Blog</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('contact') }}" class="sde-mob-link">
-                        <span><i class="bi bi-envelope me-2"></i> Contact Us</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('shop', ['on_sale' => 1]) }}" class="sde-mob-link text-danger">
-                        <span><i class="bi bi-percent me-2"></i> Offers &amp; Deals</span>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="mt-4 pt-3 border-top">
-                <div class="d-flex flex-column gap-2 font-13 text-muted">
-                    <div><i class="bi bi-telephone-fill me-2 text-primary"></i> <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('site_phone', '+919911815542')) }}" class="text-decoration-none text-dark">{{ setting('site_phone', '+91 99118 15542') }}</a></div>
-                    <div><i class="bi bi-envelope-fill me-2 text-primary"></i> <a href="mailto:{{ setting('site_email', 'thahriani.sumit@gmail.com') }}" class="text-decoration-none text-dark">{{ setting('site_email', 'thahriani.sumit@gmail.com') }}</a></div>
-                    <div><i class="bi bi-geo-alt-fill me-2 text-primary"></i> {{ setting('site_address', 'Rohini, New Delhi - 110085') }}</div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </script>
 
     {{-- SDE INTERACTIVE SCRIPTS: SEARCH CATEGORY, MEGA MENU, QUOTE --}}
     <script>
@@ -2879,6 +2994,15 @@
             $(document).on('mouseenter mouseover', '.sde-mega-cat-item', function() {
                 if (window.innerWidth >= 992) {
                     switchSdeMegaCategory(this);
+                }
+            });
+            // Mobile Menu Offcanvas Drawer Toggle
+            $(document).on('click', '.sde-mobile-toggle-btn', function(e) {
+                e.preventDefault();
+                var menuEl = document.getElementById('sdeMobileMenu');
+                if (menuEl && typeof bootstrap !== 'undefined') {
+                    var bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(menuEl);
+                    bsOffcanvas.show();
                 }
             });
         })();
