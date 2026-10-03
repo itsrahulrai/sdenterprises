@@ -36,32 +36,38 @@
 @endphp
 
 @section('content')
+
+    {{-- Breadcrumb Bar (Matches Site Standard) --}}
+    <div class="breadcrumb-kkt">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('home') }}">
+                            <i class="bi bi-house-door-fill me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('blog.index') }}">Blogs</a>
+                    </li>
+                    <li class="breadcrumb-item active text-truncate" style="max-width: min(480px, 45vw);" aria-current="page">
+                        {{ $blog->title }}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
 <section class="blog-details-section">
     <div class="container">
-
-        {{-- Top Breadcrumb --}}
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb luxury-breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('home') }}">
-                        <i class="bi bi-house-door-fill me-1"></i> Home
-                    </a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ route('blog.index') }}">Blogs</a>
-                </li>
-                <li class="breadcrumb-item active text-truncate" style="max-width: 320px;" aria-current="page">
-                    {{ $blog->title }}
-                </li>
-            </ol>
-        </nav>
 
         <div class="row g-4 g-lg-5">
 
             {{-- Main Content Column --}}
             <div class="col-lg-8">
+                <div class="sde-blog-detail-card">
 
-                {{-- Category Pill Badge --}}
+                    {{-- Category Pill Badge --}}
                 @if($catName)
                     <a href="{{ route('blog.index', ['category' => $catSlug]) }}" class="blog-detail-cat-badge">
                         {{ $catName }}
@@ -173,9 +179,9 @@
                 @endif
 
                 {{-- Article Body Content --}}
-                <article class="blog-article-content">
+                <div class="blog-article-content">
                     {!! $blog->body !!}
-                </article>
+                </div>
 
                 {{-- Tags If Available --}}
                 @if(!empty($blog->tags) && is_array($blog->tags) && count($blog->tags))
@@ -183,13 +189,15 @@
                         <span class="fw-bold text-dark me-2" style="font-size: 0.9rem;"><i class="bi bi-tags me-1"></i> Tags:</span>
                         @foreach($blog->tags as $tag)
                             <a href="{{ route('blog.index', ['tag' => $tag]) }}"
-                               class="badge text-decoration-none"
-                               style="background:#EDF6FB; color:var(--kkt-primary); font-size:0.8rem; font-weight:600; padding:6px 14px; border-radius:14px;">
+                                class="badge text-decoration-none"
+                                style="background:#FAF2EC; color:#5A3218; border:1px solid #EAD8CC; font-size:0.8rem; font-weight:600; padding:6px 14px; border-radius:14px;">
                                 #{{ $tag }}
                             </a>
                         @endforeach
                     </div>
                 @endif
+
+                </div> {{-- End .sde-blog-detail-card --}}
 
             </div>
 
@@ -197,64 +205,7 @@
             <div class="col-lg-4">
                 <aside class="sidebar-wrapper">
 
-                    {{-- Widget 1: Blog Categories --}}
-                    <div class="sidebar-luxury-card">
-                        <div class="sidebar-header">
-                            <h4 class="sidebar-title">Blog Categories</h4>
-                            <a href="{{ route('blog.index') }}" class="sidebar-viewall-link">
-                                View All <i class="bi bi-arrow-right"></i>
-                            </a>
-                        </div>
-
-                        <div class="sidebar-category-list">
-                            @if(isset($categories) && $categories->count())
-                                @foreach($categories as $category)
-                                    @php
-                                        $iconClass = $catIcons[$category->slug] ?? 'bi-folder2';
-                                        $isActive  = ($catSlug && $catSlug === $category->slug);
-                                    @endphp
-                                    <a href="{{ route('blog.index', ['category' => $category->slug]) }}"
-                                       class="sidebar-cat-row {{ $isActive ? 'active' : '' }}">
-                                        <div class="sidebar-cat-left">
-                                            <i class="bi {{ $iconClass }} sidebar-cat-icon"></i>
-                                            <span class="sidebar-cat-name">{{ $category->name }}</span>
-                                        </div>
-                                        <div class="sidebar-cat-right">
-                                            <span class="sidebar-cat-badge">{{ $category->blogs_count ?? 0 }}</span>
-                                            <i class="bi bi-chevron-right sidebar-cat-chevron"></i>
-                                        </div>
-                                    </a>
-                                @endforeach
-                            @else
-                                {{-- Fallback Category Items Matching Mockup --}}
-                                @php
-                                    $fallbackCats = [
-                                        ['name' => 'Home Decor', 'count' => 12, 'icon' => 'bi-house-door', 'slug' => 'home-decor'],
-                                        ['name' => 'Tableware', 'count' => 8, 'icon' => 'bi-cup', 'slug' => 'tableware'],
-                                        ['name' => 'Gifting Ideas', 'count' => 15, 'icon' => 'bi-gift', 'slug' => 'gifting-ideas'],
-                                        ['name' => 'Interior Trends', 'count' => 10, 'icon' => 'bi-lamp', 'slug' => 'interior-trends'],
-                                        ['name' => 'Lifestyle', 'count' => 7, 'icon' => 'bi-feather', 'slug' => 'lifestyle'],
-                                        ['name' => 'Tips & Guides', 'count' => 9, 'icon' => 'bi-journal-text', 'slug' => 'tips-guides'],
-                                        ['name' => 'Product Updates', 'count' => 6, 'icon' => 'bi-tag', 'slug' => 'product-updates'],
-                                    ];
-                                @endphp
-                                @foreach($fallbackCats as $fCat)
-                                    <a href="{{ route('blog.index', ['category' => $fCat['slug']]) }}" class="sidebar-cat-row">
-                                        <div class="sidebar-cat-left">
-                                            <i class="bi {{ $fCat['icon'] }} sidebar-cat-icon"></i>
-                                            <span class="sidebar-cat-name">{{ $fCat['name'] }}</span>
-                                        </div>
-                                        <div class="sidebar-cat-right">
-                                            <span class="sidebar-cat-badge">{{ $fCat['count'] }}</span>
-                                            <i class="bi bi-chevron-right sidebar-cat-chevron"></i>
-                                        </div>
-                                    </a>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-
-                    {{-- Widget 2: Latest Blogs --}}
+                    {{-- Widget 1: Latest Blogs --}}
                     <div class="sidebar-luxury-card">
                         <div class="sidebar-header">
                             <h4 class="sidebar-title">Latest Blogs</h4>
@@ -295,24 +246,59 @@
                         </div>
                     </div>
 
-                    {{-- Widget 3: Newsletter Box ("Stay Updated") --}}
-                    <div class="sidebar-newsletter-card">
-                        <div class="newsletter-icon-circle">
-                            <i class="bi bi-send-fill"></i>
+                    {{-- Widget 2: Blog Categories --}}
+                    <div class="sidebar-luxury-card">
+                        <div class="sidebar-header">
+                            <h4 class="sidebar-title">Blog Categories</h4>
+                            <a href="{{ route('blog.index') }}" class="sidebar-viewall-link">
+                                View All <i class="bi bi-arrow-right"></i>
+                            </a>
                         </div>
-                        <span class="newsletter-badge">STAY UPDATED</span>
-                        <h5 class="newsletter-title">Get the Latest Blogs in Your Inbox</h5>
-                        <p class="newsletter-desc">Subscribe to our newsletter and never miss an update.</p>
 
-                        <form action="{{ route('newsletter.subscribe') }}" method="POST" class="sidebar-newsletter-form">
-                            @csrf
-                            <input type="email"
-                                   name="email"
-                                   placeholder="Enter your email address"
-                                   required
-                                   aria-label="Email address for blog newsletter">
-                            <button type="submit">Subscribe</button>
-                        </form>
+                        <div class="sidebar-category-list">
+                            @if(isset($categories) && $categories->count())
+                                @foreach($categories as $category)
+                                    @php
+                                        $iconClass = $catIcons[$category->slug] ?? 'bi-cup-hot';
+                                        $isActive  = ($catSlug && $catSlug === $category->slug);
+                                    @endphp
+                                    <a href="{{ route('blog.index', ['category' => $category->slug]) }}"
+                                       class="sidebar-cat-row {{ $isActive ? 'active' : '' }}">
+                                        <div class="sidebar-cat-left">
+                                            <i class="bi {{ $iconClass }} sidebar-cat-icon"></i>
+                                            <span class="sidebar-cat-name">{{ $category->name }}</span>
+                                        </div>
+                                        <div class="sidebar-cat-right">
+                                            <span class="sidebar-cat-badge">{{ $category->blogs_count ?? 0 }}</span>
+                                            <i class="bi bi-chevron-right sidebar-cat-chevron"></i>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            @else
+                                {{-- Fallback Category Items Matching Beverage Solutions --}}
+                                @php
+                                    $fallbackCats = [
+                                        ['name' => 'Coffee Guides', 'count' => 5, 'icon' => 'bi-cup-hot', 'slug' => 'coffee-guides'],
+                                        ['name' => 'Industry Insights', 'count' => 4, 'icon' => 'bi-lightbulb', 'slug' => 'industry-insights'],
+                                        ['name' => 'Maintenance & Care', 'count' => 6, 'icon' => 'bi-tools', 'slug' => 'machine-care'],
+                                        ['name' => 'Vending Machines', 'count' => 8, 'icon' => 'bi-gear-wide-connected', 'slug' => 'vending-machines'],
+                                        ['name' => 'Premixes & Flavours', 'count' => 5, 'icon' => 'bi-basket', 'slug' => 'premixes-flavours'],
+                                    ];
+                                @endphp
+                                @foreach($fallbackCats as $fCat)
+                                    <a href="{{ route('blog.index', ['category' => $fCat['slug']]) }}" class="sidebar-cat-row">
+                                        <div class="sidebar-cat-left">
+                                            <i class="bi {{ $fCat['icon'] }} sidebar-cat-icon"></i>
+                                            <span class="sidebar-cat-name">{{ $fCat['name'] }}</span>
+                                        </div>
+                                        <div class="sidebar-cat-right">
+                                            <span class="sidebar-cat-badge">{{ $fCat['count'] }}</span>
+                                            <i class="bi bi-chevron-right sidebar-cat-chevron"></i>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
 
                 </aside>

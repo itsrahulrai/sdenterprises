@@ -20,18 +20,28 @@ class AppServiceProvider extends ServiceProvider
         // Share global settings with all views
         View::composer('*', function ($view) {
             try {
-                $siteName    = Setting::get('site_name', 'Sanni Cad Cam');
+                $siteName    = Setting::get('site_name', 'S D Enterprises');
                 $siteLogo    = Setting::get('site_logo');
                  
                 $footerPages = Page::where('status', 'published')
                     ->whereIn('slug', [
                         'privacy-policy',
+                        'terms-and-conditions',
                         'terms-conditions',
                         'shipping-policy',
                         'return-refund-policy'
                     ])
-                    ->orderBy('title')
-                    ->get();
+                    ->get()
+                    ->sortBy(function ($p) {
+                        $order = [
+                            'privacy-policy' => 1,
+                            'terms-and-conditions' => 2,
+                            'terms-conditions' => 2,
+                            'shipping-policy' => 3,
+                            'return-refund-policy' => 4,
+                        ];
+                        return $order[$p->slug] ?? 99;
+                    });
                     
 
                 $view->with(compact('siteName', 'siteLogo','footerPages'));

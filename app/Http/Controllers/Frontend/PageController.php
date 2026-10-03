@@ -10,9 +10,10 @@ class PageController extends Controller
     public function about()    { return view('frontend.pages.about'); }
     public function profile()    { return view('frontend.pages.profile'); }
     public function faq()      { return view('frontend.pages.faq'); }
-    // public function privacy()  { return view('frontend.pages.privacy'); }
-    // public function terms()    { return view('frontend.pages.terms'); }
-    // public function refund()   { return view('frontend.pages.refund'); }
+    public function privacy()       { return $this->show('privacy-policy'); }
+    public function returnRefund()  { return $this->show('return-refund-policy'); }
+    public function shipping()      { return $this->show('shipping-policy'); }
+    public function terms()         { return $this->show('terms-and-conditions'); }
 
     public function contact()  { return view('frontend.pages.contact'); }
 

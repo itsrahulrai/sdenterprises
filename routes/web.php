@@ -112,9 +112,12 @@ Route::get('/profile', [PageController::class, 'profile'])->name('profile');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'submitContact'])->name('contact.submit');
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
-// Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('privacy');
-// Route::get('/terms-conditions', [PageController::class, 'terms'])->name('terms');
-// Route::get('/refund-policy', [PageController::class, 'refund'])->name('refund');
+Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('privacy');
+Route::get('/return-refund-policy', [PageController::class, 'returnRefund'])->name('refund');
+Route::get('/refund-policy', function () { return redirect()->route('refund', [], 301); });
+Route::get('/shipping-policy', [PageController::class, 'shipping'])->name('shipping');
+Route::get('/terms-and-conditions', [PageController::class, 'terms'])->name('terms');
+Route::get('/terms-conditions', function () { return redirect()->route('terms', [], 301); });
 Route::post('/newsletter/subscribe', [PageController::class, 'newsletter'])->name('newsletter.subscribe');
 
 

@@ -301,15 +301,17 @@
 
         .sde-brand-logo img,
         .sde-logo-icon {
-            height: 64px;
+            height: 78px;
             width: auto;
             object-fit: contain;
-            transition: transform 0.25s ease;
+            filter: drop-shadow(0 2px 8px rgba(59, 28, 16, 0.12));
+            transition: transform 0.25s ease, filter 0.25s ease;
         }
 
         .sde-brand-logo:hover img,
         .sde-brand-logo:hover .sde-logo-icon {
-            transform: scale(1.02);
+            transform: scale(1.03);
+            filter: drop-shadow(0 4px 12px rgba(59, 28, 16, 0.2));
         }
 
         .sde-brand-text {
@@ -368,39 +370,29 @@
 
         @media (max-width: 991.98px) {
             .sde-brand-logo {
-                gap: 10px;
+                gap: 12px;
             }
             .sde-brand-logo img,
             .sde-logo-icon {
-                height: 48px;
+                height: 60px;
             }
             .sde-brand-name {
-                font-size: 18px;
+                font-size: 20px;
                 letter-spacing: 0.6px;
-            }
-            .sde-brand-tagline {
-                font-size: 5.6px;
-                margin-top: 2px;
-                letter-spacing: 0.2px;
             }
         }
 
         @media (max-width: 575.98px) {
             .sde-brand-logo {
-                gap: 8px;
+                gap: 10px;
             }
             .sde-brand-logo img,
             .sde-logo-icon {
-                height: 42px;
+                height: 52px;
             }
             .sde-brand-name {
-                font-size: 15px;
-                letter-spacing: 0.4px;
-            }
-            .sde-brand-tagline {
-                font-size: 4.8px;
-                margin-top: 1.5px;
-                letter-spacing: 0.15px;
+                font-size: 17px;
+                letter-spacing: 0.5px;
             }
         }
 
@@ -825,9 +817,6 @@
             .sde-mobile-nav-triggers {
                 display: flex !important;
             }
-            .sde-brand-logo img {
-                height: 52px;
-            }
         }
 
         @media (max-width: 1199.98px) and (min-width: 992px) {
@@ -999,62 +988,11 @@
             object-fit: cover;
         }
 
-        /* Floating Circular White Arrows (Like Reference Screenshot) */
+        /* Floating Arrows Removed Globally (Clean & Modern Full Banner View) */
         .sde-carousel-arrow,
         #heroCarousel .carousel-control-prev,
         #heroCarousel .carousel-control-next {
-            width: 44px !important;
-            height: 44px !important;
-            background: #FFFFFF !important;
-            border-radius: 50% !important;
-            border: none !important;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
-            top: 50% !important;
-            transform: translateY(-50%) !important;
-            opacity: 0.95 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-            cursor: pointer;
-            z-index: 10;
-            padding: 0;
-        }
-
-        .sde-carousel-arrow i,
-        #heroCarousel .carousel-control-prev i,
-        #heroCarousel .carousel-control-next i {
-            font-size: 17px !important;
-            font-weight: 800 !important;
-            color: #2B170D !important;
-            line-height: 1;
-        }
-
-        .sde-arrow-prev,
-        #heroCarousel .carousel-control-prev {
-            left: 20px !important;
-            right: auto !important;
-        }
-
-        .sde-arrow-next,
-        #heroCarousel .carousel-control-next {
-            right: 20px !important;
-            left: auto !important;
-        }
-
-        .sde-carousel-arrow:hover,
-        #heroCarousel .carousel-control-prev:hover,
-        #heroCarousel .carousel-control-next:hover {
-            background: #FFFFFF !important;
-            opacity: 1 !important;
-            transform: translateY(-50%) scale(1.1) !important;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3) !important;
-        }
-
-        .sde-carousel-arrow:hover i,
-        #heroCarousel .carousel-control-prev:hover i,
-        #heroCarousel .carousel-control-next:hover i {
-            color: #5A3218 !important;
+            display: none !important;
         }
 
         /* Indicators (Sleek Pills & Dots) */
@@ -1099,21 +1037,10 @@
             .sde-carousel-arrow,
             #heroCarousel .carousel-control-prev,
             #heroCarousel .carousel-control-next {
-                width: 36px !important;
-                height: 36px !important;
+                display: none !important;
             }
-            .sde-arrow-prev,
-            #heroCarousel .carousel-control-prev {
-                left: 10px !important;
-            }
-            .sde-arrow-next,
-            #heroCarousel .carousel-control-next {
-                right: 10px !important;
-            }
-            .sde-carousel-arrow i,
-            #heroCarousel .carousel-control-prev i,
-            #heroCarousel .carousel-control-next i {
-                font-size: 14px !important;
+            #heroCarousel .carousel-indicators {
+                margin-bottom: 8px;
             }
         }
 
@@ -1205,8 +1132,8 @@
             position: absolute;
             top: 100%;
             left: 0;
-            width: 820px;
-            max-width: 90vw;
+            width: 860px;
+            max-width: calc(100vw - 32px);
             background: #FFFFFF;
             border: 1px solid #E8DDD2;
             border-radius: 20px;
@@ -1232,11 +1159,12 @@
         .sde-mega-desktop-wrapper {
             display: flex;
             width: 100%;
+            overflow: hidden;
         }
 
         /* Left Sidebar: Categories List */
         .sde-mega-cat-sidebar {
-            width: 250px;
+            width: 240px;
             background: #FAF6F1;
             border-right: 1px solid #EDE4DB;
             padding: 16px 12px;
@@ -1245,10 +1173,14 @@
             flex-direction: column;
             max-height: 480px;
             overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: #D8C7B8 transparent;
         }
 
         .sde-mega-cat-sidebar::-webkit-scrollbar {
             width: 4px;
+            height: 0px;
         }
         .sde-mega-cat-sidebar::-webkit-scrollbar-thumb {
             background: #D8C7B8;
@@ -1324,17 +1256,34 @@
             flex: 1;
             min-width: 0;
             background: #FFFFFF;
-            padding: 24px 28px;
+            padding: 22px 26px;
             display: flex;
             flex-direction: column;
             max-height: 480px;
             overflow-y: auto;
+            overflow-x: hidden !important;
+            scrollbar-width: thin;
+            scrollbar-color: #D8C7B8 transparent;
+        }
+
+        .sde-mega-subcat-content::-webkit-scrollbar {
+            width: 5px;
+            height: 0px;
+        }
+        .sde-mega-subcat-content::-webkit-scrollbar-thumb {
+            background: #D8C7B8;
+            border-radius: 4px;
+        }
+        .sde-mega-subcat-content::-webkit-scrollbar-track {
+            background: transparent;
         }
 
         .sde-mega-subcat-panel {
             display: none;
             flex-direction: column;
             height: 100%;
+            min-width: 0;
+            width: 100%;
         }
 
         .sde-mega-subcat-panel.active {
@@ -1349,6 +1298,7 @@
             padding-bottom: 12px;
             border-bottom: 1px solid #F0E8DF;
             margin-bottom: 16px;
+            min-width: 0;
         }
 
         .sde-mega-panel-tag {
@@ -1381,6 +1331,7 @@
             color: #5A3218;
             text-decoration: none;
             transition: gap 0.2s ease;
+            flex-shrink: 0;
         }
 
         .sde-mega-explore-link:hover {
@@ -1390,13 +1341,17 @@
 
         .sde-mega-subcat-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
+            width: 100%;
+            min-width: 0;
         }
 
         .sde-mega-subcat-card {
             display: flex;
             align-items: center;
+            min-width: 0;
+            width: 100%;
             padding: 10px 14px;
             background: #FAF7F3;
             border: 1px solid #ECE2D7;
@@ -1407,6 +1362,7 @@
             font-size: 13px;
             font-weight: 500;
             transition: all 0.2s ease;
+            box-sizing: border-box;
         }
 
         .sde-mega-subcat-dot {
@@ -1422,6 +1378,7 @@
 
         .sde-mega-subcat-name {
             flex: 1;
+            min-width: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1758,6 +1715,86 @@
             color: #2B170D;
             font-weight: 600;
         }
+
+        /* Drawer Contact Box */
+        .sde-drawer-contact-box {
+            border-top: 1px solid #ECE3DA;
+            margin-top: 18px;
+            padding-top: 14px;
+            padding-bottom: 8px;
+        }
+
+        .sde-drawer-contact-heading {
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #8C7B6B;
+            margin-bottom: 10px;
+        }
+
+        .sde-drawer-contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sde-drawer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: #FAF7F3;
+            border: 1px solid #EDE4DB;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .sde-drawer-contact-item:hover {
+            background: #F3EAE0;
+            border-color: #DDD0C2;
+        }
+
+        .sde-drawer-contact-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: #3B1C10;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13.5px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(59, 28, 16, 0.2);
+        }
+
+        .sde-drawer-contact-content {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .sde-drawer-contact-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            color: #7A6A5E;
+            line-height: 1.2;
+        }
+
+        .sde-drawer-contact-val {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2B170D;
+            line-height: 1.3;
+            word-break: break-all;
+        }
     </style>
 </head>
 
@@ -1823,15 +1860,6 @@
                     @endif
                     <div class="sde-brand-text">
                         <span class="sde-brand-name">{{ setting('site_name', 'S D ENTERPRISES') }}</span>
-                        <span class="sde-brand-tagline">
-                            @php
-                                $tagline = trim(setting('site_tagline', 'BEVERAGE SOLUTIONS FOR A BETTER TOMORROW'));
-                                $taglineWords = preg_split('/\s+/', $tagline);
-                            @endphp
-                            @foreach($taglineWords as $word)
-                                <span>{{ $word }}</span>
-                            @endforeach
-                        </span>
                     </div>
                 </a>
 
@@ -2169,164 +2197,211 @@
     {{-- Main Content --}}
     @yield('content')
     
-  <footer class="gw-footer">
-
-    {{-- Trust badges --}}
-    <div class="gw-trust">
-        <div class="container">
-            <div class="gw-trust-row">
-                <div class="gw-trust-item">
-                    <div class="gw-trust-icon-wrap">
-                        <i class="bi bi-shield-check"></i>
-                    </div>
-                    <div class="gw-trust-text">
-                        <h6 class="gw-trust-title">100% Handcrafted</h6>
-                        <span class="gw-trust-sub">Premium Brass &amp; Silver Plated</span>
-                    </div>
-                </div>
-                <div class="gw-trust-item">
-                    <div class="gw-trust-icon-wrap">
-                        <i class="bi bi-gem"></i>
-                    </div>
-                    <div class="gw-trust-text">
-                        <h6 class="gw-trust-title">Authentic &amp; Vintage Designs</h6>
-                        <span class="gw-trust-sub">Timeless Metal Handicrafts</span>
-                    </div>
-                </div>
-                <div class="gw-trust-item">
-                    <div class="gw-trust-icon-wrap">
-                        <i class="bi bi-truck"></i>
-                    </div>
-                    <div class="gw-trust-text">
-                        <h6 class="gw-trust-title">Safe &amp; Secure Packaging</h6>
-                        <span class="gw-trust-sub">Delivered with Care</span>
-                    </div>
-                </div>
-                <div class="gw-trust-item">
-                    <div class="gw-trust-icon-wrap">
-                        <i class="bi bi-gift"></i>
-                    </div>
-                    <div class="gw-trust-text">
-                        <h6 class="gw-trust-title">Perfect for Gifting</h6>
-                        <span class="gw-trust-sub">Weddings, Corporate &amp; More</span>
-                    </div>
-                </div>
-                <div class="gw-trust-item">
-                    <div class="gw-trust-icon-wrap">
-                        <i class="bi bi-star-fill"></i>
-                    </div>
-                    <div class="gw-trust-text">
-                        <h6 class="gw-trust-title">Quality You Can Trust</h6>
-                        <span class="gw-trust-sub">Handmade with Excellence</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+  {{-- ============================================================
+       SDE LUXURY FOOTER (MATCHING USER SCREENSHOT)
+  ============================================================ --}}
+  <footer class="sde-main-footer">
     <div class="container">
-        <div class="gw-cols">
+        <div class="sde-footer-grid">
 
-            {{-- About --}}
-            <div class="gw-col gw-brand">
-                <a href="{{ route('home') }}" class="gw-logo">
-                    @if (setting('site_logo'))
-                        <img src="{{ asset('public/storage/' . setting('site_logo')) }}" alt="{{ config('app.name') }}">
-                    @else
-                        <img src="{{ base_public_url('assets/img/kkt.png') }}" alt="{{ config('app.name') }}">
-                    @endif
-                </a>
-                <p>{{ setting('site_tagline', 'Finesse By Design is a trusted manufacturer and exporter of premium brass, silver-plated, and luxury handcrafted tableware — delivering timeless elegance across India and worldwide.') }}</p>
-            </div>
-
-            {{-- Quick Links --}}
-            <div class="gw-col">
-                <h6>Quick Links</h6>
-                <ul>
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('about') }}">About Us</a></li>
-                    <li><a href="{{ route('shop') }}">Shop</a></li>
-                    <li><a href="{{ route('contact') }}">Contact</a></li>
-                </ul>
-            </div>
-
-            {{-- Product Categories --}}
-           <div class="gw-col">
-                    <h6>Categories</h6>
-                    @php
-                        $categories = \App\Models\Category::orderBy('name')
-                                        ->take(6)
-                                        ->get();
-                    @endphp
-
-                    <ul>
-                        @forelse($categories as $category)
-                            <li>
-                                <a href="{{ route('shop', ['category' => $category->slug]) }}">
-                                    {{ $category->name }}
-                                </a>
-                            </li>
-                        @empty
-                            <li>No categories found.</li>
-                        @endforelse
-                    </ul>
+            {{-- Col 1: Brand, About, Newsletter, Socials --}}
+            <div class="sde-footer-col sde-footer-brand-col">
+                <div class="sde-footer-logo">
+                    <a href="{{ route('home') }}" aria-label="{{ setting('site_name', 'S D Enterprises') }}">
+                        @if (setting('site_logo'))
+                            <img src="{{ asset('public/storage/' . setting('site_logo')) }}" alt="{{ setting('site_name', 'S D Enterprises') }}">
+                        @else
+                            <img src="{{ asset('public/storage/settings/31e8e946-fc6d-4444-a061-129f203316b3.webp') }}" alt="{{ setting('site_name', 'S D Enterprises') }}">
+                        @endif
+                    </a>
                 </div>
+                <p class="sde-footer-desc">
+                    {{ setting('footer_about', 'A simple coffee dispenser does wonders to alter the work-comfort balance of employees under your roof. S.D Enterprises Digital supplies and maintains an array of coffee machines; choose the one that works for you and start brewing cups of performance to taste.') }}
+                </p>
 
-            {{-- Customer Support --}}
-            <div class="gw-col">
-                <h6>Useful Links</h6>
-                <ul>
-                    @if($footerPages && $footerPages->count())
-                        @foreach($footerPages as $page)
-                            <li><a href="{{ route('page.show', $page->slug) }}">{{ $page->title }}</a></li>
-                        @endforeach
-                    @endif
+                {{-- Social Icons --}}
+                <div class="sde-footer-socials">
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://wa.me/919911815542" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                </div>
+            </div>
+
+            {{-- Col 2: Quick Links --}}
+            <div class="sde-footer-col">
+                <h5 class="sde-footer-heading">Quick Links</h5>
+                <div class="sde-heading-accent"></div>
+                <ul class="sde-footer-links">
+                    <li>
+                        <a href="{{ route('home') }}">
+                            <span>Home</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('about') }}">
+                            <span>About Us</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('shop') }}">
+                            <span>Shop</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('blog.index') }}">
+                            <span>Blog</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('contact') }}">
+                            <span>Contact Us</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
-            {{-- Contact --}}
-            <div class="gw-col">
-                <h6>Contact Us</h6>
-                <ul class="gw-contact">
-                    <li><i class="bi bi-geo-alt-fill"></i> {{ setting('site_address', 'Address') }}</li>
-                    @if(setting('site_phone'))
-                    <li><i class="bi bi-telephone-fill"></i> <a href="tel:{{ setting('site_phone') }}">{{ setting('site_phone') }}</a></li>
-                    @endif
-                    @if(setting('site_email'))
-                    <li><i class="bi bi-envelope-fill"></i> <a href="mailto:{{ setting('site_email') }}">{{ setting('site_email') }}</a></li>
-                    @endif
+            {{-- Col 3: Product Categories --}}
+            <div class="sde-footer-col">
+                <h5 class="sde-footer-heading">Product Categories</h5>
+                <div class="sde-heading-accent"></div>
+                <ul class="sde-footer-links">
+                    <li>
+                        <a href="{{ route('shop', ['category' => 'coffee-machines']) }}">
+                            <span>Coffee Machines</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('shop', ['category' => 'coffee-premixes']) }}">
+                            <span>Coffee Premixes</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('shop', ['category' => 'combos']) }}">
+                            <span>Combos</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('shop', ['category' => 'tea-machines']) }}">
+                            <span>Tea Machines</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('shop', ['category' => 'water-dispensers']) }}">
+                            <span>Water Dispensers</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            {{-- Col 4: Customer Care --}}
+            <div class="sde-footer-col">
+                <h5 class="sde-footer-heading">Customer Care</h5>
+                <div class="sde-heading-accent"></div>
+                <ul class="sde-footer-links">
+                    <li>
+                        <a href="{{ auth()->check() ? route('account.dashboard') : route('login') }}">
+                            <span>My Account</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('shipping') }}">
+                            <span>Shipping Policy</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('refund') }}">
+                            <span>Return and Refund Policy</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('terms') }}">
+                            <span>Terms and Conditions</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('privacy') }}">
+                            <span>Privacy Policy</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            {{-- Col 5: Contact Us --}}
+            <div class="sde-footer-col sde-footer-contact-col">
+                <h5 class="sde-footer-heading">Contact Us</h5>
+                <div class="sde-heading-accent"></div>
+                <ul class="sde-footer-contact-list">
+                    <li>
+                        <div class="sde-contact-icon-circle">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div class="sde-contact-text">
+                            {{ setting('site_address', 'Rohini, New Delhi - 110085') }}
+                        </div>
+                    </li>
+                    <li>
+                        <div class="sde-contact-icon-circle">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <div class="sde-contact-text">
+                            <a href="tel:{{ setting('site_phone', '+91 99118 15542') }}">
+                                {{ setting('site_phone', '+91 99118 15542') }}
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="sde-contact-icon-circle">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <div class="sde-contact-text">
+                            <a href="mailto:{{ setting('site_email', 'thahriani.sumit@gmail.com') }}">
+                                {{ setting('site_email', 'thahriani.sumit@gmail.com') }}
+                            </a>
+                        </div>
+                    </li>
                 </ul>
             </div>
 
         </div>
-
     </div>
 
-    {{-- Bottom --}}
-    <div class="gw-bottom">
+    {{-- Bottom Bar --}}
+    <div class="sde-footer-bottom">
         <div class="container">
-            <div class="gw-bottom-inner">
-                <div class="gw-copy">© {{ date('Y') }} {{ setting('site_name', 'Finesse By Design') }}. All Rights Reserved.</div>
+            <div class="sde-footer-bottom-inner">
 
-                
-        {{-- Social --}}
-       
-                <div class="gw-pay">
-                    
-            <div class="gw-social">
-                <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
-                <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-                <a href="#"><i class="bi bi-youtube"></i></a>
-                <a href="#"><i class="bi bi-whatsapp"></i></a>
-            </div>
-        
+                {{-- Copyright --}}
+                <div class="sde-footer-copy">
+                    &copy; {{ date('Y') }} <strong>{{ setting('site_name', 'S D Enterprises') }}</strong>. All Rights Reserved.
                 </div>
+
+                {{-- Developer Credit --}}
+                <div class="sde-footer-developer">
+                    Developed by <a href="https://hoverbusinessservices.com/" target="_blank" rel="noopener noreferrer">Hover Business Services</a>
+                </div>
+
             </div>
         </div>
     </div>
-
-</footer>
+  </footer>
 
     {{-- Quick Quote Modal --}}
     <div class="modal fade" id="quickQuoteModal" tabindex="-1" aria-labelledby="quickQuoteModalLabel" aria-hidden="true">
@@ -2391,30 +2466,15 @@
         <div class="offcanvas-header sde-drawer-header">
             <a href="{{ route('home') }}" class="sde-brand-logo">
                 @if (setting('site_logo'))
-                    <img src="{{ asset('public/storage/' . setting('site_logo')) }}" alt="{{ config('app.name') }}" style="height:42px; width:42px; object-fit:contain; border-radius:50%; background:#ffffff; padding:2px; box-shadow:0 2px 6px rgba(0,0,0,0.25);">
+                    <img src="{{ asset('public/storage/' . setting('site_logo')) }}" alt="{{ config('app.name') }}" style="height:50px; width:50px; object-fit:contain; border-radius:50%; background:#ffffff; padding:2px; box-shadow:0 2px 8px rgba(0,0,0,0.25);">
                 @endif
                 <div class="sde-brand-text">
-                    <span class="sde-brand-name text-white" style="font-size:16px; letter-spacing:0.5px;">S D ENTERPRISES</span>
-                    <span class="sde-brand-tagline text-white-50" style="font-size:5.2px; margin-top:2px;">
-                        @php
-                            $drawerWords = preg_split('/\s+/', trim(setting('site_tagline', 'BEVERAGE SOLUTIONS FOR A BETTER TOMORROW')));
-                        @endphp
-                        @foreach($drawerWords as $word)
-                            <span>{{ $word }}</span>
-                        @endforeach
-                    </span>
+                    <span class="sde-brand-name text-white" style="font-size:17px; letter-spacing:0.5px;">{{ setting('site_name', 'S D ENTERPRISES') }}</span>
                 </div>
             </a>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body sde-drawer-body">
-            <div class="mb-3">
-                <a href="https://wa.me/919911815542?text={{ urlencode('Hello S D Enterprises, I would like to enquire about beverage solutions.') }}" target="_blank" class="btn sde-quote-btn w-100 justify-content-center">
-                    <i class="bi bi-whatsapp"></i>
-                    <span>Enquire Now</span>
-                </a>
-            </div>
-
             <ul class="sde-mob-menu">
                 {{-- 1. Home --}}
                 <li>
@@ -2563,11 +2623,50 @@
                 </li>
             </ul>
 
-            <div class="mt-4 pt-3 border-top">
-                <div class="d-flex flex-column gap-2 font-13 text-muted">
-                    <div><i class="bi bi-telephone-fill me-2 text-primary"></i> <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('site_phone', '+919911815542')) }}" class="text-decoration-none text-dark">{{ setting('site_phone', '+91 99118 15542') }}</a></div>
-                    <div><i class="bi bi-envelope-fill me-2 text-primary"></i> <a href="mailto:{{ setting('site_email', 'thahriani.sumit@gmail.com') }}" class="text-decoration-none text-dark">{{ setting('site_email', 'thahriani.sumit@gmail.com') }}</a></div>
-                    <div><i class="bi bi-geo-alt-fill me-2 text-primary"></i> {{ setting('site_address', 'Rohini, New Delhi - 110085') }}</div>
+            {{-- Drawer Contact Details --}}
+            <div class="sde-drawer-contact-box">
+                <span class="sde-drawer-contact-heading">Get in Touch</span>
+                <div class="sde-drawer-contact-list">
+                    {{-- Phone --}}
+                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', setting('site_phone', '+919911815542')) }}" class="sde-drawer-contact-item">
+                        <div class="sde-drawer-contact-icon">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <div class="sde-drawer-contact-content">
+                            <span class="sde-drawer-contact-label">Phone Support</span>
+                            <span class="sde-drawer-contact-val">{{ setting('site_phone', '+91 99118 15542') }}</span>
+                        </div>
+                    </a>
+
+                    {{-- Email --}}
+                    <a href="mailto:{{ setting('site_email', 'thahriani.sumit@gmail.com') }}" class="sde-drawer-contact-item">
+                        <div class="sde-drawer-contact-icon">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <div class="sde-drawer-contact-content">
+                            <span class="sde-drawer-contact-label">Email Us</span>
+                            <span class="sde-drawer-contact-val">{{ setting('site_email', 'thahriani.sumit@gmail.com') }}</span>
+                        </div>
+                    </a>
+
+                    {{-- Address --}}
+                    <div class="sde-drawer-contact-item">
+                        <div class="sde-drawer-contact-icon">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div class="sde-drawer-contact-content">
+                            <span class="sde-drawer-contact-label">Our Location</span>
+                            <span class="sde-drawer-contact-val">{{ setting('site_address', 'Rohini, New Delhi - 110085') }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- WhatsApp Enquire Now Button --}}
+                <div class="mt-3">
+                    <a href="https://wa.me/919911815542?text={{ urlencode('Hello S D Enterprises, I would like to enquire about beverage solutions.') }}" target="_blank" class="btn sde-quote-btn w-100 justify-content-center">
+                        <i class="bi bi-whatsapp"></i>
+                        <span>Enquire Now</span>
+                    </a>
                 </div>
             </div>
         </div>

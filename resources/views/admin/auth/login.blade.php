@@ -2,361 +2,328 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - {{ setting('site_name', 'S D Enterprises') }}</title>
 
-    <title>Login - Finesse By Design</title>
+    {{-- Fonts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    >
+    {{-- Bootstrap 5 & Icons --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
         :root {
-            /* ===============================
-               FINESSE BY DESIGN BRAND COLORS
-            =============================== */
+            /* ============================================================
+               S D ENTERPRISES BRAND PALETTE (Grounded in the Logo)
+               Rich Espresso, Warm Roast Brown, Amber Gold, and Cream
+            ============================================================ */
+            --sde-coffee-dark: #24130A;
+            --sde-espresso: #2B170D;
+            --sde-primary: #4A2511;
+            --sde-secondary: #5A3218;
+            --sde-accent: #7A421C;
+            --sde-gold: #C89F65;
+            --sde-gold-light: #E8CA9D;
+            --sde-gold-dark: #A67C43;
 
-            --kkt-primary: #0B6FAE;
-            --kkt-secondary: #118CC4;
-            --kkt-accent: #55B9E1;
+            --sde-bg: #FAF7F3;
+            --sde-card: #FFFFFF;
+            --sde-border: #E8DCCF;
+            --sde-border-subtle: #F0E8DF;
 
-            --kkt-blue-dark: #075A91;
-            --kkt-blue-light: #EAF6FC;
+            --sde-text-dark: #24130A;
+            --sde-text: #4A3E37;
+            --sde-muted: #85756A;
 
-            --kkt-silver: #AEB6BE;
-            --kkt-silver-light: #E8EDF1;
-            --kkt-silver-dark: #737D86;
+            --sde-shadow:
+                0 18px 45px rgba(36, 19, 10, 0.10),
+                0 6px 18px rgba(36, 19, 10, 0.05);
 
-            --kkt-bg: #F5F8FA;
-            --kkt-card: #FFFFFF;
-            --kkt-light: #EDF6FB;
+            --sde-radius: 22px;
+            --sde-radius-sm: 12px;
 
-            --kkt-dark: #151B21;
-            --kkt-text: #52606B;
-            --kkt-muted: #87939D;
-
-            --kkt-border: #DDE6EC;
-
-            --kkt-shadow:
-                0 15px 40px rgba(11, 111, 174, .10),
-                0 30px 70px rgba(20, 30, 40, .10);
-
-            --kkt-radius: 22px;
-            --kkt-radius-sm: 14px;
-
-            --kkt-gradient:
-                linear-gradient(
-                    135deg,
-                    #075A91 0%,
-                    #0B6FAE 38%,
-                    #118CC4 70%,
-                    #55B9E1 100%
-                );
-
-            --kkt-silver-gradient:
-                linear-gradient(
-                    135deg,
-                    #757F88 0%,
-                    #AEB6BE 35%,
-                    #EEF1F3 65%,
-                    #919AA2 100%
-                );
+            --sde-gradient: linear-gradient(135deg, #24130A 0%, #4A2511 48%, #6B3718 100%);
+            --sde-gold-gradient: linear-gradient(135deg, #A67C43 0%, #C89F65 52%, #E8CA9D 100%);
         }
 
         * {
-            font-family: 'Rubik', sans-serif;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
             margin: 0;
             min-height: 100vh;
-
             background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(85, 185, 225, .14),
-                    transparent 28%
-                ),
-                radial-gradient(
-                    circle at bottom left,
-                    rgba(174, 182, 190, .16),
-                    transparent 30%
-                ),
-                linear-gradient(
-                    135deg,
-                    #F8FBFD 0%,
-                    #EEF5F9 52%,
-                    #E5EEF4 100%
-                );
-
+                radial-gradient(circle at 18% 18%, rgba(200, 159, 101, 0.16), transparent 36%),
+                radial-gradient(circle at 82% 82%, rgba(74, 37, 17, 0.13), transparent 42%),
+                linear-gradient(135deg, #F8F3ED 0%, #FAF6F1 50%, #F2E9DE 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-
-            padding: 30px 15px;
-
+            padding: 32px 16px;
             overflow-x: hidden;
         }
 
         .login-card {
             width: 100%;
             max-width: 440px;
-
-            background: rgba(255, 255, 255, .96);
-
-            border-radius: var(--kkt-radius);
-
-            padding: 42px;
-
-            border: 1px solid rgba(11, 111, 174, .10);
-
-            box-shadow: var(--kkt-shadow);
-
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: var(--sde-radius);
+            padding: 40px 36px 42px;
+            border: 1px solid var(--sde-border);
+            box-shadow: var(--sde-shadow);
             position: relative;
             overflow: hidden;
-
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(14px);
         }
 
-        /* Premium top accent */
+        /* Top Gold Accent Bar */
         .login-card::before {
             content: '';
-
             position: absolute;
-
             top: 0;
             left: 0;
             right: 0;
-
             height: 4px;
-
-            background: var(--kkt-gradient);
+            background: var(--sde-gold-gradient);
         }
 
-        /* Decorative blue glow */
+        /* Soft Decorative Coffee Glow */
         .login-card::after {
             content: '';
-
             position: absolute;
-
-            top: -90px;
-            right: -90px;
-
-            width: 210px;
-            height: 210px;
-
+            top: -95px;
+            right: -95px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(85, 185, 225, .16),
-                    rgba(11, 111, 174, .05) 55%,
-                    transparent 72%
-                );
-
+            background: radial-gradient(circle, rgba(200, 159, 101, 0.15), rgba(74, 37, 17, 0.04) 55%, transparent 72%);
             pointer-events: none;
         }
 
-        .login-logo {
+        /* Logo & Brand Presentation */
+        .login-logo-wrap {
             text-align: center;
             margin-bottom: 22px;
-
             position: relative;
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .login-logo img {
-            width: 290px;
-            height: 115px;
+        .login-logo-badge {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            padding: 5px;
+            box-shadow: 0 8px 24px rgba(59, 28, 16, 0.12);
+            border: 2px solid var(--sde-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            transition: transform 0.3s ease;
+        }
 
-            max-width: 100%;
+        .login-logo-badge:hover {
+            transform: scale(1.04);
+        }
 
+        .login-logo-badge img {
+            width: 100%;
+            height: 100%;
             object-fit: contain;
-
-            display: block;
-
-            margin: 0 auto;
+            border-radius: 50%;
         }
 
+        .login-brand-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--sde-coffee-dark);
+            letter-spacing: 0.8px;
+            margin: 0;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .login-brand-tagline {
+            font-family: 'Poppins', sans-serif;
+            font-size: 8.5px;
+            font-weight: 600;
+            color: var(--sde-muted);
+            letter-spacing: 0.6px;
+            margin: 4px 0 0 0;
+            text-transform: uppercase;
+        }
+
+        /* Header Subtitle */
         .login-heading {
             text-align: center;
-
-            margin-bottom: 28px;
-
+            margin-bottom: 26px;
             position: relative;
             z-index: 2;
         }
 
-        .login-heading h1 {
-            margin: 0 0 7px;
-
-            font-size: 1.55rem;
-
-            font-weight: 800;
-
-            color: var(--kkt-dark);
+        .login-portal-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(200, 159, 101, 0.12);
+            color: var(--sde-gold-dark);
+            border: 1px solid rgba(200, 159, 101, 0.3);
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
 
         .login-heading p {
             margin: 0;
-
-            font-size: .86rem;
-
-            color: var(--kkt-muted);
+            font-size: 0.85rem;
+            color: var(--sde-text);
+            font-weight: 500;
         }
 
+        .premium-divider {
+            width: 48px;
+            height: 2.5px;
+            margin: 10px auto 0;
+            border-radius: 10px;
+            background: var(--sde-gold-gradient);
+        }
+
+        /* Form Controls */
         .form-label {
-            font-size: .86rem;
-
-            font-weight: 700;
-
-            color: var(--kkt-dark);
-
-            margin-bottom: 8px;
+            font-size: 0.83rem;
+            font-weight: 600;
+            color: var(--sde-text-dark);
+            margin-bottom: 7px;
+            letter-spacing: 0.2px;
         }
 
         .input-group {
-            border-radius: var(--kkt-radius-sm);
-
+            border-radius: var(--sde-radius-sm);
             overflow: hidden;
-
-            border: 1px solid var(--kkt-border);
-
-            transition:
-                border-color .25s ease,
-                box-shadow .25s ease;
-
-            background: #fff;
+            border: 1.5px solid var(--sde-border);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            background: #FFFFFF;
         }
 
         .input-group:focus-within {
-            border-color: var(--kkt-primary);
-
-            box-shadow:
-                0 0 0 .20rem rgba(11, 111, 174, .10);
+            border-color: var(--sde-gold-dark);
+            box-shadow: 0 0 0 0.22rem rgba(200, 159, 101, 0.18);
         }
 
         .input-group-text {
-            background: #fff;
-
+            background: #FFFFFF;
             border: none;
-
-            color: var(--kkt-primary);
-
-            padding-left: 16px;
+            color: var(--sde-primary);
+            padding-left: 15px;
             padding-right: 6px;
-
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
 
         .form-control {
             border: none;
-
-            height: 52px;
-
-            font-size: .92rem;
-
-            color: var(--kkt-text);
-
+            height: 48px;
+            font-size: 0.9rem;
+            color: var(--sde-text-dark);
             box-shadow: none !important;
-
-            background: #fff;
+            background: #FFFFFF;
         }
 
         .form-control:focus {
-            background: #fff;
+            background: #FFFFFF;
+            color: var(--sde-text-dark);
         }
 
         .form-control::placeholder {
-            color: #9CA7B0;
+            color: #A3968B;
+            font-weight: 400;
+            font-size: 0.88rem;
         }
 
+        .btn-toggle-pwd {
+            background: #FFFFFF;
+            border: none;
+            color: #8C7B6B;
+            padding-right: 14px;
+            padding-left: 6px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .btn-toggle-pwd:hover {
+            color: var(--sde-primary);
+        }
+
+        /* Remember Box */
         .remember-box {
             display: flex;
-
             align-items: center;
             justify-content: space-between;
-
-            margin-top: 5px;
-            margin-bottom: 26px;
+            margin-top: 6px;
+            margin-bottom: 24px;
         }
 
         .form-check-label {
-            font-size: .84rem;
-
-            color: var(--kkt-muted);
+            font-size: 0.83rem;
+            color: var(--sde-text);
+            font-weight: 500;
+            user-select: none;
+            cursor: pointer;
         }
 
         .form-check-input {
-            border-color: var(--kkt-silver);
+            border-color: var(--sde-border);
+            cursor: pointer;
         }
 
         .form-check-input:checked {
-            background-color: var(--kkt-primary);
-            border-color: var(--kkt-primary);
+            background-color: var(--sde-primary);
+            border-color: var(--sde-primary);
         }
 
         .form-check-input:focus {
-            border-color: var(--kkt-primary);
-
-            box-shadow:
-                0 0 0 .18rem rgba(11, 111, 174, .12);
+            border-color: var(--sde-gold-dark);
+            box-shadow: 0 0 0 0.18rem rgba(200, 159, 101, 0.2);
         }
 
+        /* Sign In Button */
         .btn-login {
             width: 100%;
-
-            height: 54px;
-
+            height: 50px;
             border: none;
-
-            border-radius: 14px;
-
-            background: var(--kkt-gradient);
-
-            color: #fff;
-
+            border-radius: var(--sde-radius-sm);
+            background: var(--sde-gradient);
+            color: #FFFFFF;
             font-weight: 700;
-
-            font-size: .95rem;
-
-            letter-spacing: .3px;
-
-            transition: all .28s ease;
-
-            box-shadow:
-                0 12px 26px rgba(11, 111, 174, .24);
+            font-size: 0.92rem;
+            letter-spacing: 0.5px;
+            transition: all 0.28s ease;
+            box-shadow: 0 10px 24px rgba(59, 28, 16, 0.25);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-login:hover {
-            background:
-                linear-gradient(
-                    135deg,
-                    #064F80,
-                    #0B6FAE 45%,
-                    #1596CF
-                );
-
+            background: linear-gradient(135deg, #1A0D06 0%, #3B1C10 48%, #5A2E14 100%);
             transform: translateY(-2px);
-
-            color: #fff;
-
-            box-shadow:
-                0 16px 34px rgba(11, 111, 174, .30);
+            box-shadow: 0 14px 30px rgba(59, 28, 16, 0.35);
+            color: #FFFFFF;
         }
 
         .btn-login:active {
@@ -364,31 +331,40 @@
         }
 
         .btn-login i {
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
 
+        /* Alert */
         .alert-danger {
-            border: 1px solid rgba(220, 53, 69, .12);
-
-            background: rgba(220, 53, 69, .07);
-
+            border: 1px solid rgba(220, 53, 69, 0.2);
+            background: #FFF5F5;
             color: #B42318;
-
             border-radius: 12px;
-
-            font-size: .84rem;
+            font-size: 0.84rem;
+            font-weight: 500;
         }
 
-        /* Small premium divider */
-        .premium-divider {
-            width: 56px;
-            height: 3px;
+        /* Return to Website link */
+        .login-back-link {
+            text-align: center;
+            margin-top: 22px;
+            position: relative;
+            z-index: 2;
+        }
 
-            margin: 12px auto 0;
+        .login-back-link a {
+            color: var(--sde-muted);
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-            border-radius: 20px;
-
-            background: var(--kkt-silver-gradient);
+        .login-back-link a:hover {
+            color: var(--sde-primary);
         }
 
         @media (max-width: 576px) {
@@ -397,36 +373,22 @@
             }
 
             .login-card {
-                padding: 30px 22px;
-
+                padding: 30px 22px 34px;
                 border-radius: 18px;
             }
 
-            .login-logo {
-                margin-bottom: 18px;
+            .login-logo-badge {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 10px;
             }
 
-            .login-logo img {
-                width: 230px;
-                height: auto;
-
-                max-width: 100%;
-
-                margin: 0 auto;
-
-                object-fit: contain;
+            .login-brand-name {
+                font-size: 17px;
             }
 
-            .login-heading {
-                margin-bottom: 24px;
-            }
-
-            .login-heading h1 {
-                font-size: 1.35rem;
-            }
-
-            .login-heading p {
-                font-size: .8rem;
+            .login-brand-tagline {
+                font-size: 7.5px;
             }
         }
     </style>
@@ -436,147 +398,120 @@
 
     <div class="login-card">
 
-        <div class="login-logo">
+        {{-- Logo & Brand Block --}}
+        <div class="login-logo-wrap">
+            <div class="login-logo-badge">
+                @if (setting('site_logo'))
+                    <img
+                        src="{{ asset('public/storage/' . setting('site_logo')) }}"
+                        alt="{{ setting('site_name', 'S D Enterprises') }}"
+                    >
+                @else
+                    <i class="bi bi-cup-hot" style="font-size: 32px; color: #4A2511;"></i>
+                @endif
+            </div>
 
-            @if (setting('site_logo'))
-
-                <img
-                    src="{{ asset('public/storage/' . setting('site_logo')) }}"
-                    alt="{{ config('app.name') }}"
-                >
-
-            @else
-
-                <img
-                    src="{{ base_public_url('assets/img/Finessebydesign.png') }}"
-                    alt="{{ config('app.name') }}"
-                >
-
-            @endif
-
-        </div>
-
-        <div class="login-heading">
-
-            <p>
-                Sign in to manage Finesse By Design
-            </p>
-
-            <div class="premium-divider"></div>
-
+            <h1 class="login-brand-name">{{ setting('site_name', 'S D ENTERPRISES') }}</h1>
+            <p class="login-brand-tagline">{{ setting('site_tagline', 'BEVERAGE SOLUTIONS FOR A BETTER TOMORROW') }}</p>
         </div>
 
         @if ($errors->any())
-
-            <div class="alert alert-danger py-2 px-3 mb-4">
-
-                {{ $errors->first() }}
-
+            <div class="alert alert-danger py-2 px-3 mb-4 d-flex align-items-center gap-2">
+                <i class="bi bi-exclamation-circle-fill flex-shrink-0"></i>
+                <span>{{ $errors->first() }}</span>
             </div>
-
         @endif
 
-        <form
-            method="POST"
-            action="{{ route('admin.login.submit') }}"
-        >
-
+        <form method="POST" action="{{ route('admin.login.submit') }}">
             @csrf
 
             <div class="mb-3">
-
-                <label class="form-label">
+                <label class="form-label" for="adminEmail">
                     Email Address
                 </label>
-
                 <div class="input-group">
-
                     <span class="input-group-text">
-
                         <i class="bi bi-envelope"></i>
-
                     </span>
-
                     <input
                         type="email"
+                        id="adminEmail"
                         name="email"
                         class="form-control"
                         value="{{ old('email') }}"
-                        placeholder="admin@gmail.com"
+                        placeholder="admin@sdenterprises.com"
                         required
                         autofocus
                     >
-
                 </div>
-
             </div>
 
             <div class="mb-3">
-
-                <label class="form-label">
+                <label class="form-label" for="adminPassword">
                     Password
                 </label>
-
                 <div class="input-group">
-
                     <span class="input-group-text">
-
                         <i class="bi bi-lock"></i>
-
                     </span>
-
                     <input
                         type="password"
+                        id="adminPassword"
                         name="password"
                         class="form-control"
                         placeholder="••••••••"
                         required
                     >
-
+                    <button type="button" class="btn-toggle-pwd" id="togglePasswordBtn" aria-label="Toggle password visibility">
+                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                    </button>
                 </div>
-
             </div>
 
             <div class="remember-box">
-
                 <div class="form-check">
-
                     <input
                         class="form-check-input"
                         type="checkbox"
                         name="remember"
                         id="remember"
                     >
-
-                    <label
-                        class="form-check-label"
-                        for="remember"
-                    >
+                    <label class="form-check-label" for="remember">
                         Remember me
                     </label>
-
                 </div>
-
             </div>
 
-            <button
-                type="submit"
-                class="btn btn-login"
-            >
-
-                <i class="bi bi-shield-lock me-2"></i>
-
-                Sign In
-
+            <button type="submit" class="btn btn-login">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>Sign In to Dashboard</span>
             </button>
-
         </form>
+
+        <div class="login-back-link">
+            <a href="{{ route('home') }}">
+                <i class="bi bi-arrow-left"></i>
+                <span>Back to {{ setting('site_name', 'S D Enterprises') }}</span>
+            </a>
+        </div>
 
     </div>
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Password Visibility Toggle
+        const toggleBtn = document.getElementById('togglePasswordBtn');
+        const pwdInput = document.getElementById('adminPassword');
+        const pwdIcon = document.getElementById('togglePasswordIcon');
 
+        if (toggleBtn && pwdInput && pwdIcon) {
+            toggleBtn.addEventListener('click', function () {
+                const isPassword = pwdInput.getAttribute('type') === 'password';
+                pwdInput.setAttribute('type', isPassword ? 'text' : 'password');
+                pwdIcon.classList.toggle('bi-eye', !isPassword);
+                pwdIcon.classList.toggle('bi-eye-slash', isPassword);
+            });
+        }
+    </script>
 </body>
 </html>

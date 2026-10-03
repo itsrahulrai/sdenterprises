@@ -7,7 +7,7 @@
     @if ($banners->count())
         <section class="sde-hero-section">
             <div class="container">
-                <div id="heroCarousel" class="carousel slide carousel-fade sde-hero-carousel shadow-sm" data-bs-ride="carousel" data-bs-interval="5000">
+                <div id="heroCarousel" class="carousel slide carousel-fade sde-hero-carousel shadow-sm" data-bs-ride="carousel" data-bs-interval="5000" data-bs-touch="true">
 
                     {{-- Indicators --}}
                     <div class="carousel-indicators">
@@ -41,14 +41,6 @@
                         @endforeach
                     </div>
 
-                    {{-- Controls (Circular Floating Buttons) --}}
-                    <button class="carousel-control-prev sde-carousel-arrow sde-arrow-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Previous">
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-
-                    <button class="carousel-control-next sde-carousel-arrow sde-arrow-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Next">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
                 </div>
             </div>
         </section>
@@ -393,16 +385,16 @@
                 text-align: center !important;
             }
 
-            /* Action Pill Button matching reference */
+            /* Action Button */
             .sde-cat-action-btn-pill {
                 width: 100%;
                 height: 36px;
-                border-radius: 50px;
+                border-radius: 8px;
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-content: space-between;
                 position: relative;
-                padding: 0 16px;
+                padding: 0 8px 0 14px;
                 transition: all 0.3s ease;
                 box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             }
@@ -412,11 +404,12 @@
                 font-size: 11.5px;
                 font-weight: 700;
                 letter-spacing: 0.2px;
+                white-space: nowrap;
             }
 
             .sde-cat-action-btn-circle {
-                position: absolute;
-                right: 7px;
+                position: relative;
+                right: auto;
                 width: 23px;
                 height: 23px;
                 border-radius: 50%;
@@ -424,6 +417,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                flex-shrink: 0;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
                 transition: transform 0.25s ease;
             }
@@ -502,37 +496,44 @@
                 }
                 .sde-cat-info { padding: 6px 1px 0 1px; }
                 .sde-cat-title {
-                    font-size: 10.5px;
-                    margin-bottom: 2px;
+                    font-size: 13px;
+                    margin-bottom: 3px;
                     letter-spacing: 0.2px;
-                    line-height: 1.2;
+                    line-height: 1.25;
                 }
                 .sde-cat-desc {
-                    font-size: 8.5px;
-                    line-height: 1.25;
+                    font-size: 11px;
+                    line-height: 1.35;
                     min-height: auto;
-                    margin-bottom: 6px;
+                    margin-bottom: 7px;
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
                 }
                 .sde-cat-action-btn-pill {
-                    height: 25px;
-                    padding: 0 8px;
-                    border-radius: 30px;
+                    height: 29px;
+                    padding: 0 5px 0 8px;
+                    border-radius: 6px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
                 }
                 .sde-cat-action-btn-text {
-                    font-size: 9px;
+                    font-size: 10px;
                     font-weight: 700;
+                    white-space: nowrap;
+                    letter-spacing: 0.1px;
                 }
                 .sde-cat-action-btn-circle {
-                    width: 17px;
-                    height: 17px;
-                    right: 4px;
+                    position: relative;
+                    right: auto;
+                    width: 18px;
+                    height: 18px;
+                    flex-shrink: 0;
                 }
                 .sde-cat-action-btn-circle i {
-                    font-size: 8.5px;
+                    font-size: 9.5px;
                 }
             }
         </style>
@@ -739,32 +740,31 @@
         </section>
     @endif
 
-    {{-- Latest Blog / Articles --}}
-    @if ($latestBlogs->count())
-        <section class="py-5" style="
-            background: radial-gradient(circle at bottom left, rgba(17,140,196,.04), transparent 30%),
-                        linear-gradient(180deg, #FFFFFF 0%, #F6F9FB 100%);
-        ">
-            <div class="container">
-                <div class="position-relative mb-4">
-                    <div class="section-luxury-header mb-0">
-                        <div class="section-luxury-header-content">
-                            <div class="sec-explore-tag">
+    {{-- ============================================================
+         LATEST BLOGS / ARTICLES SECTION
+    ============================================================ --}}
+    @if ($latestBlogs && $latestBlogs->count())
+        <section class="sde-lux-section sde-blogs-section" style="background-color: #FFFFFF !important; background-image: none !important; border-top: 1px solid #ECE4DA; border-bottom: 1px solid #ECE4DA;">
+            <div class="container position-relative" style="z-index: 2;">
+                <div class="sde-lux-header">
+                    <div class="cat-section-header mb-0">
+                        <div class="cat-header-content text-center">
+                            <div class="cat-explore-tag">
                                 <span class="tag-line"></span>
-                                <span class="tag-text">STORIES & INSPIRATION</span>
+                                <span class="tag-text">INSIGHTS &amp; GUIDES</span>
                                 <span class="tag-line"></span>
                             </div>
-                            <h2 class="sec-main-heading">
-                                Latest <span class="sec-heading-accent">Articles</span>
+                            <h2 class="cat-main-heading">
+                                Latest <span class="cat-heading-accent">Articles</span>
                             </h2>
-                            <p class="sec-desc">
-                                Explore stories of timeless craftsmanship, design inspiration, and luxury living.
+                            <p class="cat-desc">
+                                Explore coffee machine buying guides, maintenance tips, and beverage solutions.
                             </p>
                         </div>
                     </div>
-                    <div class="d-none d-md-block position-absolute end-0 top-50 translate-middle-y">
-                        <a href="{{ route('blog.index') }}" class="btn-luxury-viewall">
-                            <span>View All</span>
+                    <div class="sde-lux-header-action d-none d-md-block">
+                        <a href="{{ route('blog.index') }}" class="sde-pill-viewall">
+                            <span>View All Articles</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
@@ -774,7 +774,7 @@
                     @foreach ($latestBlogs as $blog)
                         <div class="col-lg-4 col-md-6">
                             <a href="{{ route('blog.show', $blog->slug) }}" class="text-decoration-none h-100 d-block">
-                                <article class="luxury-article-card">
+                                <article class="luxury-article-card sde-article-card">
                                     {{-- Image Wrapper --}}
                                     <div class="article-img-wrap">
                                         <img src="{{ $blog->thumbnail_url }}"
@@ -784,7 +784,7 @@
 
                                         {{-- Category Badge --}}
                                         <span class="article-cat-badge">
-                                            {{ $blog->blogCategory->name ?? 'Craftsmanship' }}
+                                            {{ $blog->blogCategory->name ?? 'Coffee Guides' }}
                                         </span>
 
                                         {{-- Published Date --}}
@@ -799,7 +799,7 @@
                                         <div class="article-meta-row">
                                             <span><i class="bi bi-clock-history me-1"></i> 3 min read</span>
                                             <span>•</span>
-                                            <span><i class="bi bi-gem me-1"></i> Luxury Living</span>
+                                            <span><i class="bi bi-cup-hot me-1"></i> Beverage Solutions</span>
                                         </div>
 
                                         <h3 class="article-title" title="{{ $blog->title }}">
@@ -824,7 +824,7 @@
                 </div>
 
                 <div class="text-center mt-4 d-md-none">
-                    <a href="{{ route('blog.index') }}" class="btn-luxury-viewall">
+                    <a href="{{ route('blog.index') }}" class="sde-pill-viewall">
                         <span>View All Articles</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -966,7 +966,7 @@
     font-size: 11.5px;
     font-weight: 600;
     padding: 7px 18px;
-    border-radius: 50px;
+    border-radius: 8px;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -1066,6 +1066,122 @@
     line-height: 1.2;
 }
 
+/* S D Enterprises Article Cards */
+.sde-article-card {
+    background: #FFFFFF !important;
+    border: 1px solid #ECE4DA !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 16px rgba(59, 28, 16, 0.04) !important;
+    transition: all 0.35s ease !important;
+}
+.sde-article-card:hover {
+    border-color: #D4B896 !important;
+    box-shadow: 0 10px 28px rgba(59, 28, 16, 0.1) !important;
+    transform: translateY(-4px) !important;
+}
+.sde-article-card .article-img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: #F5EFEB;
+}
+.sde-article-card .article-cat-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 3;
+    background: #3B1C10 !important;
+    color: #F7E7CE !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 8px rgba(59, 28, 16, 0.3) !important;
+}
+.sde-article-card .article-date-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    z-index: 3;
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #6D5E52 !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    padding: 3px 9px !important;
+    border-radius: 6px !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+.sde-article-card .article-date-badge i {
+    color: #C37B15 !important;
+}
+.sde-article-card .article-body {
+    padding: 20px !important;
+}
+.sde-article-card .article-meta-row {
+    font-size: 11.5px !important;
+    color: #9C8B7E !important;
+    margin-bottom: 8px !important;
+}
+.sde-article-card .article-meta-row i {
+    color: #C37B15 !important;
+}
+.sde-article-card .article-title {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: #24140D !important;
+    line-height: 1.4 !important;
+    margin-bottom: 8px !important;
+    transition: color 0.25s ease !important;
+}
+.sde-article-card:hover .article-title {
+    color: #C37B15 !important;
+}
+.sde-article-card .article-excerpt {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 12.5px !important;
+    color: #6D5E52 !important;
+    line-height: 1.6 !important;
+    margin-bottom: 16px !important;
+}
+.sde-article-card .article-card-footer {
+    border-top: 1px solid #F1E9DF !important;
+    padding-top: 12px !important;
+}
+.sde-article-card .article-read-text {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #3B1C10 !important;
+    letter-spacing: 0.3px !important;
+    transition: color 0.25s ease !important;
+}
+.sde-article-card:hover .article-read-text {
+    color: #C37B15 !important;
+}
+.sde-article-card .article-arrow-btn {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 8px !important;
+    background: #FAF5EE !important;
+    color: #8C6542 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 13px !important;
+    transition: all 0.25s ease !important;
+}
+.sde-article-card:hover .article-arrow-btn {
+    background: #3B1C10 !important;
+    color: #FFFFFF !important;
+    transform: translateX(3px) !important;
+}
+
 /* Responsive */
 @media (max-width: 991.98px) {
     .sde-lux-title { font-size: 28px; }
@@ -1081,15 +1197,25 @@
 
 @media (max-width: 767.98px) {
     .sde-lux-section { padding: 36px 0 44px; }
-    .cat-main-heading { font-size: 26px !important; margin-bottom: 6px !important; }
-    .cat-desc { font-size: 12px !important; line-height: 1.45 !important; }
-    .cat-explore-tag { gap: 8px; padding: 3px 12px; margin-bottom: 6px; }
-    .cat-explore-tag .tag-text { font-size: 9.5px; letter-spacing: 1.8px; }
+    .cat-main-heading { font-size: 28px !important; margin-bottom: 7px !important; }
+    .cat-desc { font-size: 13.5px !important; line-height: 1.5 !important; }
+    .cat-explore-tag { gap: 8px; padding: 4px 14px; margin-bottom: 7px; }
+    .cat-explore-tag .tag-text { font-size: 11px; letter-spacing: 1.8px; }
     .sde-trust-bar { padding: 14px 16px; }
     .sde-trust-item { gap: 10px; }
-    .sde-trust-icon { width: 36px; height: 36px; font-size: 16px; }
-    .sde-trust-text h4 { font-size: 11px; }
-    .sde-trust-text p { font-size: 9.5px; }
+    .sde-trust-icon { width: 38px; height: 38px; font-size: 17px; }
+    .sde-trust-text h4 { font-size: 13px; }
+    .sde-trust-text p { font-size: 11px; }
+    .sde-pill-viewall { border-radius: 6px; padding: 7px 16px; font-size: 12.5px; }
+
+    /* Article Card Mobile Sizing */
+    .sde-article-card .article-body { padding: 16px !important; }
+    .sde-article-card .article-title { font-size: 1.12rem !important; }
+    .sde-article-card .article-excerpt { font-size: 13px !important; line-height: 1.55 !important; }
+    .sde-article-card .article-meta-row { font-size: 12px !important; }
+    .sde-article-card .article-read-text { font-size: 13px !important; }
+    .sde-article-card .article-cat-badge { font-size: 11px !important; }
+    .sde-article-card .article-date-badge { font-size: 11.5px !important; }
 }
 </style>
 @endpush

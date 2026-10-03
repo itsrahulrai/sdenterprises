@@ -4,20 +4,24 @@
 @section('meta_description', 'Discover design inspirations, gifting guides, and stories of artisanal brass craftsmanship from Finesse By Designed.')
 
 @section('content')
+    {{-- Breadcrumb Bar (Matches Site Standard) --}}
+    <div class="breadcrumb-kkt">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('home') }}">
+                            <i class="bi bi-house-door-fill me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
 <section class="luxury-blog-listing-section">
     <div class="container">
-
-        {{-- Top Luxury Breadcrumb --}}
-        <nav aria-label="breadcrumb" class="mb-4">
-            <ol class="breadcrumb luxury-breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('home') }}">
-                        <i class="bi bi-house-door-fill me-1"></i> Home
-                    </a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Blog</li>
-            </ol>
-        </nav>
 
         {{-- Section Luxury Header --}}
         <div class="section-luxury-header mb-5 text-center">
@@ -28,10 +32,10 @@
                     <span class="tag-line"></span>
                 </div>
                 <h1 class="sec-main-heading">
-                    The Brass & Decor <span class="sec-heading-accent">Journal</span>
+                    Beverage & Vending <span class="sec-heading-accent">Insights</span>
                 </h1>
                 <p class="sec-desc mx-auto" style="max-width: 680px;">
-                    Explore curated design guides, artisanal brass craftsmanship traditions, interior inspirations, and timeless living stories.
+                    Explore practical beverage solutions, commercial vending machine buying guides, cost reduction tips, and machine care insights from S D Enterprises.
                 </p>
             </div>
         </div>
